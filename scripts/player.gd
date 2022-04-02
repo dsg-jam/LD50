@@ -17,6 +17,8 @@ func _unhandled_input(event):
 		self.position += Vector2.LEFT * TILE_SIZE
 	elif event.is_action_pressed("move_right"):
 		self.position += Vector2.RIGHT * TILE_SIZE
+	self.position.x = clamp(self.position.x, TILE_SIZE/2, 1048)
+	self.position.y = clamp(self.position.y, TILE_SIZE/2, 620)
 
 func _process(delta):
 	pass
