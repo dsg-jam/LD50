@@ -65,3 +65,7 @@ texture = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
 polygon = PoolVector2Array( 0, -6, 3, -6, 5, -4, 5, 0, 6, 2, 6, 8, -6, 8, -6, 2, -5, 0, -5, -4, -3, -6 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( -20, -20 )
+current = true
