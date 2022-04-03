@@ -46,6 +46,8 @@ func move(dir: String) -> void:
 
 func _on_Player_body_entered(body: Node) -> void:
 	if body.name == "Checkpoints":
+		moves_left = MAX_PLAYER_MOVES
+		emit_signal("update_moves_left_counter", moves_left)
 		print("Charging up, please stand by (this might take a wile...)")
 	elif body.name == "Target":
 		print("You completed this level successfully!")
