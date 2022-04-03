@@ -59,6 +59,7 @@ func _on_Player_body_entered(body: Node) -> void:
 		print("Charging up, please stand by (this might take a wile...)")
 	elif body.name == "Target":
 		moves_left = MAX_PLAYER_MOVES
+		emit_signal("update_moves_left_counter", moves_left)
 		print("You completed this level successfully!")
 
 func decreas_moves_left():
