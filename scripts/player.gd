@@ -49,8 +49,6 @@ func move(dir: String) -> void:
 	ray.force_raycast_update()
 	if !ray.is_colliding():
 		self.position += DIRECTIONS[dir] * TILE_SIZE
-		self.position.x = clamp(self.position.x, TILE_SIZE/2.0, 1048)
-		self.position.y = clamp(self.position.y, TILE_SIZE/2.0, 620)
 		decreas_moves_left()
 
 
