@@ -28,11 +28,8 @@ func _ready():
 
 func set_player_position(pos:Vector2):
 	self.position = pos
-	print (self.position)
 	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
-	print (self.position)
 	self.position += Vector2.ONE * TILE_SIZE/2
-	print (self.position)
 
 func _unhandled_input(event):
 	for dir in DIRECTIONS:
@@ -56,6 +53,7 @@ func _on_Player_body_entered(body: Node) -> void:
 	if body.name == "Checkpoints":
 		moves_left = MAX_PLAYER_MOVES
 		emit_signal("update_moves_left_counter", moves_left)
+		last_checkpoint = self.position - Vector2(8,8)
 		print("Charging up, please stand by (this might take a wile...)")
 	elif body.name == "Target":
 		moves_left = MAX_PLAYER_MOVES
