@@ -20,14 +20,19 @@ var moves_left: int
 
 
 func _ready():
-	last_checkpoint = startposition * TILE_SIZE
+	last_checkpoint = startposition
 	set_player_position(last_checkpoint)
 	moves_left = MAX_PLAYER_MOVES;
 	emit_signal("update_moves_left_counter", moves_left)
 
+func pixel_to_grid_position(pixel_position:Vector2) -> Vector2:
+	return (pixel_position / TILE_SIZE).floor()
 
-func set_player_position(pos:Vector2):
-	self.position = pos
+func grid_to_pixel_position(grid_position:Vector2) -> Vector2:
+	return (grid_position * TILE_SIZE)
+
+func set_player_position(grid_pos:Vector2):
+	self.position = grid_to_pixel_position(grid_pos)
 	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
 	self.position += Vector2.ONE * TILE_SIZE/2
 
@@ -53,7 +58,7 @@ func _on_Player_body_entered(body: Node) -> void:
 	if body.name == "Checkpoints":
 		moves_left = MAX_PLAYER_MOVES
 		emit_signal("update_moves_left_counter", moves_left)
-		last_checkpoint = self.position - Vector2(8,8)
+		last_checkpoint = pixel_to_grid_position(self.position)
 		print("Charging up, please stand by (this might take a wile...)")
 	elif body.name == "Target":
 		moves_left = MAX_PLAYER_MOVES
