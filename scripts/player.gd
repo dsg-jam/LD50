@@ -4,7 +4,8 @@ signal update_moves_left_counter(moves_left)
 
 var MAX_SPEED: int = 50
 var TILE_SIZE: int = 16
-var last_checkpoint := Vector2.ONE
+var last_checkpoint: Vector2
+export var startposition: Vector2 = Vector2(2,2)
 
 var DIRECTIONS: Dictionary = {
 	"move_up": Vector2.UP,
@@ -19,13 +20,15 @@ var moves_left: int
 
 
 func _ready():
+	last_checkpoint = startposition * TILE_SIZE
 	set_player_position(last_checkpoint)
 	moves_left = MAX_PLAYER_MOVES;
 	emit_signal("update_moves_left_counter", moves_left)
 
 
 func set_player_position(pos:Vector2):
-	self.position = self.position.snapped(pos * TILE_SIZE)
+	self.position = pos
+	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
 	self.position += Vector2.ONE * TILE_SIZE/2
 
 func _unhandled_input(event):
