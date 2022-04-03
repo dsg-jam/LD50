@@ -33,6 +33,8 @@ func _process(_delta):
 	pass
 
 func move(dir: String) -> void:
+	if moves_left <= 0:
+		return
 	ray.cast_to = DIRECTIONS[dir] * TILE_SIZE
 	ray.force_raycast_update()
 	if !ray.is_colliding():
