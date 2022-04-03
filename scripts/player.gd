@@ -1,7 +1,10 @@
 extends Area2D
 
+signal update_moves_left_counter(moves_left)
+
 var MAX_SPEED: int = 50
 var TILE_SIZE: int = 16
+
 var DIRECTIONS: Dictionary = {
 	"move_up": Vector2.UP,
 	"move_down": Vector2.DOWN,
@@ -10,10 +13,15 @@ var DIRECTIONS: Dictionary = {
 }
 
 onready var ray: RayCast2D = $RayCast2D
+export var MAX_PLAYER_MOVES: int  = 10
+var moves_left: int
+
 
 func _ready():
 	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
 	self.position += Vector2.ONE * TILE_SIZE/2
+	moves_left = MAX_PLAYER_MOVES;
+	emit_signal("update_moves_left_counter", moves_left)
 
 
 func _unhandled_input(event):
@@ -38,3 +46,7 @@ func _on_Player_body_entered(body: Node) -> void:
 		print("Charging up, please stand by (this might take a wile...)")
 	elif body.name == "Target":
 		print("You completed this level successfully!")
+
+func decreas_moves_left():
+	moves_left -= 1
+	emit_signal("update_moves_left_counter", moves_left)
