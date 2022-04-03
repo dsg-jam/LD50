@@ -200,6 +200,7 @@ __meta__ = {
 position = Vector2( 40, 40 )
 collision_mask = 2
 script = ExtResource( 1 )
+MAX_PLAYER_MOVES = 50
 
 [node name="Sprite" type="Sprite" parent="Player"]
 texture = ExtResource( 3 )
@@ -211,10 +212,10 @@ shape = SubResource( 10 )
 position = Vector2( -20, -20 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
-limit_left = 0
-limit_top = 0
-limit_right = 1050
-limit_bottom = 620
+limit_left = -48
+limit_top = -48
+limit_right = 544
+limit_bottom = 320
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
 enabled = true
