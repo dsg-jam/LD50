@@ -28,8 +28,11 @@ func _ready():
 
 func set_player_position(pos:Vector2):
 	self.position = pos
+	print (self.position)
 	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
+	print (self.position)
 	self.position += Vector2.ONE * TILE_SIZE/2
+	print (self.position)
 
 func _unhandled_input(event):
 	for dir in DIRECTIONS:
@@ -40,15 +43,15 @@ func _process(_delta):
 	pass
 
 func move(dir: String) -> void:
-	if moves_left <= 0:
+	if hasNoMovesLeft():
 		return
 	ray.cast_to = DIRECTIONS[dir] * TILE_SIZE
 	ray.force_raycast_update()
 	if !ray.is_colliding():
-		decreas_moves_left()
 		self.position += DIRECTIONS[dir] * TILE_SIZE
 		self.position.x = clamp(self.position.x, TILE_SIZE/2.0, 1048)
 		self.position.y = clamp(self.position.y, TILE_SIZE/2.0, 620)
+		decreas_moves_left()
 
 
 func _on_Player_body_entered(body: Node) -> void:
@@ -62,5 +65,8 @@ func _on_Player_body_entered(body: Node) -> void:
 func decreas_moves_left():
 	moves_left -= 1
 	emit_signal("update_moves_left_counter", moves_left)
-	if (moves_left <= 0) :
+	if (hasNoMovesLeft()) :
 		set_player_position(last_checkpoint)
+
+func hasNoMovesLeft() -> bool:
+	return moves_left < 0
