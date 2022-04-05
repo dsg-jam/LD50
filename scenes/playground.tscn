@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/tilemap.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/player_down_idle.png" type="Texture" id=3]
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/light.png" type="Texture" id=5]
+[ext_resource path="res://assets/celing_light.png" type="Texture" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -257,6 +258,27 @@ shadow_enabled = true
 
 [node name="SceneDarkener" type="CanvasModulate" parent="."]
 position = Vector2( 41, 40 )
-color = Color( 0.0392157, 0.0392157, 0.0784314, 1 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 39.88, 39.88 )
+scale = Vector2( 0.792969, 0.792969 )
+texture = ExtResource( 6 )
+texture_scale = 0.02
+
+[node name="Light2D2" type="Light2D" parent="."]
+position = Vector2( 40, 104 )
+scale = Vector2( 0.787109, 0.787109 )
+texture = ExtResource( 6 )
+texture_scale = 0.02
+
+[node name="Light2D3" type="Light2D" parent="."]
+position = Vector2( 167.993, 103.993 )
+rotation = 1.5708
+scale = Vector2( 0.804025, 0.804025 )
+texture = ExtResource( 6 )
+texture_scale = 0.02
+energy = 1.2
+shadow_enabled = true
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
