@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/tilemap.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/player_down_idle.png" type="Texture" id=3]
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/light.png" type="Texture" id=5]
+[ext_resource path="res://scripts/Checkpoints.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -11,8 +13,26 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
+[sub_resource type="OccluderPolygon2D" id=11]
+polygon = PoolVector2Array( 14.4196, 9.05313, 14.6134, 4.20795, 1.24078, 4.40176, 1.24078, 16, 14.4196, 16 )
+
+[sub_resource type="OccluderPolygon2D" id=12]
+polygon = PoolVector2Array( 14.4196, 16, 1.43459, 16, 1.43459, 3.90628, 14.4196, 3.90628 )
+
+[sub_resource type="OccluderPolygon2D" id=13]
+polygon = PoolVector2Array( 1.32674, 4.40176, 0.939117, 4.20795, 1.13293, 16, 14.5056, 16, 15.087, 3.82034 )
+
+[sub_resource type="OccluderPolygon2D" id=14]
+polygon = PoolVector2Array( 14.5056, 10.3019, 0.939117, 10.3019, 0.939117, 5.45676, 14.5056, 5.45676 )
+
+[sub_resource type="OccluderPolygon2D" id=15]
+polygon = PoolVector2Array( 12.0721, 14.6735, 3.73837, 14.6735, 4.31978, 1.30084, 11.8783, 1.88226 )
+
+[sub_resource type="OccluderPolygon2D" id=16]
+polygon = PoolVector2Array( 9.35876, 13.5966, 6.25786, 13.5966, 6.25786, 1.58061, 9.35876, 1.58061 )
+
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 15.8363 )
 
 [sub_resource type="ConvexPolygonShape2D" id=4]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -28,6 +48,11 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=17]
+points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="GDScript" id=18]
 
 [sub_resource type="TileSet" id=9]
 0/name = "grass"
@@ -104,7 +129,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 3/autotile/icon_coordinate = Vector2( 0, 0 )
 3/autotile/tile_size = Vector2( 16, 16 )
 3/autotile/spacing = 0
-3/autotile/occluder_map = [  ]
+3/autotile/occluder_map = [ Vector2( 0, 0 ), SubResource( 11 ), Vector2( 0, 1 ), SubResource( 12 ), Vector2( 1, 0 ), SubResource( 13 ), Vector2( 1, 1 ), SubResource( 14 ), Vector2( 2, 0 ), SubResource( 15 ), Vector2( 2, 1 ), SubResource( 16 ) ]
 3/autotile/navpoly_map = [  ]
 3/autotile/priority_map = [  ]
 3/autotile/z_index_map = [  ]
@@ -151,8 +176,15 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "one_way_margin": 1.0,
 "shape": SubResource( 8 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 2, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 17 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
+script = SubResource( 18 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 6, 6 )
@@ -180,6 +212,7 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 2
 format = 1
 tile_data = PoolIntArray( 131074, 1, 0, 393218, 1, 0, 393226, 1, 0, 393227, 2, 0 )
+script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -219,5 +252,15 @@ limit_bottom = 320
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
 enabled = true
 cast_to = Vector2( 0, 16 )
+
+[node name="playerLight" type="Light2D" parent="Player"]
+texture = ExtResource( 5 )
+texture_scale = 0.2
+color = Color( 0.858824, 0.85098, 0.658824, 0.839216 )
+energy = 0.6
+shadow_enabled = true
+
+[node name="SceneDarkener" type="CanvasModulate" parent="."]
+color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
