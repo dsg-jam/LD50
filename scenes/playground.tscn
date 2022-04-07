@@ -1,11 +1,11 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/tilemap.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/player_down_idle.png" type="Texture" id=3]
 [ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/light.png" type="Texture" id=5]
-[ext_resource path="res://assets/celing_light.png" type="Texture" id=6]
+[ext_resource path="res://scripts/Checkpoints.gd" type="Script" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -51,6 +51,8 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=17]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
+
+[sub_resource type="GDScript" id=18]
 
 [sub_resource type="TileSet" id=9]
 0/name = "grass"
@@ -182,6 +184,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
+script = SubResource( 18 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 6, 6 )
@@ -209,6 +212,7 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 2
 format = 1
 tile_data = PoolIntArray( 131074, 1, 0, 393218, 1, 0, 393226, 1, 0, 393227, 2, 0 )
+script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -257,28 +261,6 @@ energy = 0.6
 shadow_enabled = true
 
 [node name="SceneDarkener" type="CanvasModulate" parent="."]
-position = Vector2( 41, 40 )
-color = Color( 0, 0, 0, 1 )
-
-[node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 39.88, 39.88 )
-scale = Vector2( 0.792969, 0.792969 )
-texture = ExtResource( 6 )
-texture_scale = 0.02
-
-[node name="Light2D2" type="Light2D" parent="."]
-position = Vector2( 40, 104 )
-scale = Vector2( 0.787109, 0.787109 )
-texture = ExtResource( 6 )
-texture_scale = 0.02
-
-[node name="Light2D3" type="Light2D" parent="."]
-position = Vector2( 167.993, 103.993 )
-rotation = 1.5708
-scale = Vector2( 0.804025, 0.804025 )
-texture = ExtResource( 6 )
-texture_scale = 0.02
-energy = 1.2
-shadow_enabled = true
+color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
 
 [connection signal="body_entered" from="Player" to="Player" method="_on_Player_body_entered"]
