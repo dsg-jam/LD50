@@ -1,8 +1,11 @@
-Theme: Delay the inevitable
 # IDEAS
 
+Theme: Delay the inevitable
+
 ## Round based games
+
 ### Power management game
+
 - *Delay*ing a *power outage* by building new power plants and managing the sale of energy to customers *-> what is the inevitable part? does the consumtion grow and if so why?*
 
 - tower defense style game

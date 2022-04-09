@@ -25,13 +25,13 @@ func _ready():
 	moves_left = MAX_PLAYER_MOVES;
 	emit_signal("update_moves_left_counter", moves_left)
 
-func pixel_to_grid_position(pixel_position:Vector2) -> Vector2:
+func pixel_to_grid_position(pixel_position: Vector2) -> Vector2:
 	return (pixel_position / TILE_SIZE).floor()
 
-func grid_to_pixel_position(grid_position:Vector2) -> Vector2:
+func grid_to_pixel_position(grid_position: Vector2) -> Vector2:
 	return (grid_position * TILE_SIZE)
 
-func set_player_position(grid_pos:Vector2):
+func set_player_position(grid_pos: Vector2):
 	self.position = grid_to_pixel_position(grid_pos)
 	self.position = self.position.snapped(Vector2.ONE * TILE_SIZE)
 	self.position += Vector2.ONE * TILE_SIZE/2

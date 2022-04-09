@@ -7,5 +7,5 @@ func _ready():
 	var err = player.connect("update_moves_left_counter", self, "_on_update_counter")
 	assert(err == OK)
 
-func _on_update_counter(count:int):
+func _on_update_counter(count: int):
 	set_text(str(count))
